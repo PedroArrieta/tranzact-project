@@ -3,15 +3,24 @@ resource "azurerm_virtual_network" "virtual_network" {
     location            = var.location
     resource_group_name = var.resource_group_name
     address_space       = [ var.address_space ]
-    dynamic "subnet" {
-        for_each = var.subnets == null ? [] : var.subnets
-        content {
-            name             = subnet.value.name
-            address_prefixes = subnet.value.address_prefix
-            security_group   = lookup(subnet.value, "security_group", null)
-        }
-    }
+    # dynamic "subnet" {
+    #     for_each = var.subnets == null ? [] : var.subnets
+    #     content {
+    #         name             = subnet.value.name
+    #         address_prefixes = subnet.value.address_prefix
+    #         security_group   = lookup(subnet.value, "security_group", null)
+    #     }
+    # }
     tags = var.tags
+}
+
+resource "azurerm_subnet" "example" {
+    for_each = var.subnets
+
+    name                 = each.value.name
+    resource_group_name  = each.value.resource_group_name
+    address_prefixes     = each.value.address_prefixes
+    virtual_network_name = azurerm_virtual_network.virtual_network.name
 }
 
 # resource "azurerm_subnet" "subnet" {
