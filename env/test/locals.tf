@@ -21,7 +21,7 @@ locals {
       priority                   = 100
       direction                  = "Inbound"
       access                     = "Allow"
-      protocol                   = "Tcp"
+      protocol                   = "*"
       source_port_range          = "*"
       destination_port_range     = "*"
       source_address_prefix      = "*"
@@ -31,11 +31,10 @@ locals {
 
   containers = {
     "container-1" = {
-      name                 = "container-1"
+      name                 = "container-tf"
       container_access_type  = "private"
     }
   }
-
 
   network_acls = [
     {
