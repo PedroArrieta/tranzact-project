@@ -16,10 +16,10 @@ resource "azurerm_storage_account" "storage_account" {
     tags = var.tags
 }
 
-# resource "azurerm_storage_account_network_rules" "example" {
-#     storage_account_id         = azurerm_storage_account.storage_account.id
-#     default_action             = var.default_action
-#     ip_rules                   = [ var.ip_rules ]
-#     virtual_network_subnet_ids = [ var.virtual_network_subnet_ids ]
-#     bypass                     = [ var.bypass]
-# }
+resource "azurerm_storage_container" "containers" {
+    for_each = var.containers
+
+    name                  = each.value.name
+    container_access_type = each.value.container_access_type
+    storage_account_name  = azurerm_storage_account.storage_account.name
+}

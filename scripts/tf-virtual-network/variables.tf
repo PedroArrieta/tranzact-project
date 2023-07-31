@@ -19,9 +19,14 @@ variable "address_space" {
 }
 
 variable "subnets" {
-    description = "(Optional) Can be specified multiple times to define multiple subnets."
-    type        = list(any)
-    default     = []
+    description = "Map of subnets to create"
+    type        = map(object({
+        name                  = string
+        resource_group_name   = string
+        virtual_network_name  = string
+        address_prefixes      = list(string)
+        service_endpoints     = list(string)
+    }))
 }
 
 variable "tags" {

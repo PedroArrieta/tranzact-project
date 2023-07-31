@@ -27,11 +27,3 @@ resource "azurerm_key_vault" "key_vault" {
     }
     tags = var.tags
 }
-
-# resource "azurerm_key_vault_access_policy" "example" {
-#     key_vault_id       = azurerm_key_vault.key_vault.id
-#     tenant_id          = var.tenant_id #data.azurerm_client_config.current.tenant_id
-#     object_id          = var.object_id #data.azurerm_client_config.current.service_principal_object_id
-#     key_permissions    = [ var.key_permissions ]
-#     secret_permissions = [ var.secret_permissions ]
-# }

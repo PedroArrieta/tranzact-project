@@ -34,3 +34,17 @@ variable "network_rules" {
     type        = list(any)
     default     = []
 }
+
+variable "containers" {
+    description = "Map of containers to create"
+    type        = map(object({
+        name                   = string
+        container_access_type  = string
+
+    }))
+}
+
+variable "tags" {
+    description = "Tags for resources."
+    type        = map(string)
+}

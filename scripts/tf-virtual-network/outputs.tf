@@ -8,9 +8,9 @@ output "id" {
     value       = azurerm_virtual_network.virtual_network.id
 }
 
-output "subnets" {
-    description = "Subnet(s) of the Virtual Network."
-    value       = azurerm_virtual_network.virtual_network.subnet
+output "subnet_ids" {
+    description = "IDs of the subnets created."
+    value = values(azurerm_subnet.subnets)[0].id
 }
 
 output "Address_space" {

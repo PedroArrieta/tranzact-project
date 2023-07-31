@@ -13,15 +13,14 @@ variable "resource_group_name" {
     type        = string
 }
 
+variable "subnet_id" {
+    description = "(Required) The ID of the Subnet. Changing this forces a new resource to be created."
+    type        = string
+}
 variable "security_rules" {
     description = "(Optional) List of objects representing security rules, as defined below."
     type        = list(any)
     default     = []
-}
-
-variable "subnet_id" {
-    description = "(Required) The ID of the Subnet. Changing this forces a new resource to be created."
-    type        = string
 }
 
 variable "tags" {
